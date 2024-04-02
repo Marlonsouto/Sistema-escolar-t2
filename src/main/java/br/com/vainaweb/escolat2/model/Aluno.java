@@ -33,11 +33,13 @@ public class Aluno {
     private String email;
 
     //ex:+55 91 00000-0000
-    @Pattern(regexp= "\\+\\d{2}-\\d{2}\\d{5}\\d{4}")
+
+    @Pattern(regexp= "\\+\\d{2}-\\d{2}\\d{5}-\\d{4}")
     private String telefone;
 
     @Setter
-    @Column(unique = true)
+    @Pattern(regexp= "\\d{3}-\\d{3}-\\d{3}-\\d{2}")
+    @Column(unique = true, nullable = false)
     private String cpf;
 
     @Setter
