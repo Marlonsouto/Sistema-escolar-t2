@@ -4,5 +4,4 @@ public enum CursoEnum {
     FRONTEND,
     BACKEND,
     MOBILE;
-
 }
