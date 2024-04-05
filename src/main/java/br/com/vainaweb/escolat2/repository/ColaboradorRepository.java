@@ -5,7 +5,10 @@ import org.springframework.stereotype.Repository;
 
 import br.com.vainaweb.escolat2.model.ColaboradorModel;
 
+import java.util.Optional;
+
 @Repository // Trata a interface como a camada de persistência
 public interface ColaboradorRepository extends JpaRepository<ColaboradorModel, Long>{
-	
+
+     Optional<ColaboradorModel> findByCpf(String cpf);
 }

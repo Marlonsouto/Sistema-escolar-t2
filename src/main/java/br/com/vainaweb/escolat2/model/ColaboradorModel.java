@@ -1,5 +1,8 @@
 package br.com.vainaweb.escolat2.model;
 
+import br.com.vainaweb.escolat2.dto.DadosAtualizados;
+import br.com.vainaweb.escolat2.dto.EnderecoDto;
+import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.vainaweb.escolat2.enums.Cargo;
@@ -22,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class ColaboradorModel {
 	
 	@Id // Determina a chave primária
@@ -45,13 +48,20 @@ public class ColaboradorModel {
 	private Endereco endereco;
 	
 //  |----------------------------------------Construtor-----------------------------------------|
-	
-	public ColaboradorModel(String nome, String cpf, String email, Cargo cargo) {
+
+
+
+	public ColaboradorModel(String nome, String cpf, String email, Cargo cargo, @Valid EnderecoDto endereco) {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.cargo = cargo;
+		this.endereco = new Endereco(endereco.cep(), endereco.logradouro(),
+				endereco.bairro(), endereco.cidade(), endereco.complemento(), endereco.uf(), endereco.numero());
 	}
-	
-	
+
+	public void atualizarInfo(@Valid DadosAtualizados dados) {
+		this.nome = dados.nome() != null ? dados.nome(): this.nome;
+		this.email = dados.email()!= null ? dados.email(): this.email;
+	}
 }
