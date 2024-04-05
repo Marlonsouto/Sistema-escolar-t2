@@ -60,7 +60,10 @@ public class ColaboradorModel {
 				endereco.bairro(), endereco.cidade(), endereco.complemento(), endereco.uf(), endereco.numero());
 	}
 
-	public void atualizarInfo(@Valid DadosAtualizados dados) {
+    public ColaboradorModel(String nome, String cpf, String email, Cargo cargo, Endereco endereco) {
+    }
+
+    public void atualizarInfo(@Valid DadosAtualizados dados) {
 		this.nome = dados.nome() != null ? dados.nome(): this.nome;
 		this.email = dados.email()!= null ? dados.email(): this.email;
 	}

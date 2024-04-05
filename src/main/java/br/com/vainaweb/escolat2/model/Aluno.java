@@ -11,8 +11,6 @@ import lombok.Setter;
 
 @Entity()
 @Table(name = "tb_alunos")
-
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class Aluno {
@@ -22,14 +20,14 @@ public class Aluno {
     private Long id_aluno;
 
     @Getter @Setter
-    @Column()
+    @Column( nullable = false)
     private String nome;
     @Getter
     private CursoEnum curso;
 
     @Getter
     @Email
-    @Column(unique = true, nullable = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
     //ex:+55 91 00000-0000
@@ -45,6 +43,7 @@ public class Aluno {
 
     @Getter
     @Embedded
+    @Column(unique = true)
     private Endereco endereco;
 
     public Aluno(String nome, CursoEnum curso, String email, String telefone, String cpf, Endereco endereco) {
@@ -54,5 +53,14 @@ public class Aluno {
         this.telefone = telefone;
         this.cpf = cpf;
         this.endereco = endereco;
+    }
+
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "nome='" + nome + '\'' +
+                ", curso=" + curso +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

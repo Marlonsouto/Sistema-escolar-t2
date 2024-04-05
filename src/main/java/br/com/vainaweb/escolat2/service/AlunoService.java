@@ -1,17 +1,17 @@
 package br.com.vainaweb.escolat2.service;
 
 import br.com.vainaweb.escolat2.dto.DadosAluno;
-import br.com.vainaweb.escolat2.enums.CursoEnum;
 import br.com.vainaweb.escolat2.model.Aluno;
-import br.com.vainaweb.escolat2.model.Endereco;
 import br.com.vainaweb.escolat2.repository.AlunoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
+@Service
 public class AlunoService {
 
+    @Autowired
     private AlunoRepository alunoRepository;
 
     public void salvarAluno(DadosAluno dadosAluno) {
@@ -22,8 +22,20 @@ public class AlunoService {
     }
 
     public List<Aluno> ListarAlunos() {
+
         var alunoList = alunoRepository.findAll();
+
+        if (alunoList.isEmpty()) {
+            System.err.println("Lista vazia");
+        }
         return alunoList;
+    }
+
+    public void deletarAluno(Long id) throws IllegalAccessException {
+        if (!alunoRepository.existsById(id)){
+            throw new IllegalAccessException("O ID que voce forneceu nao existe");
+        }
+        alunoRepository.deleteById(id);
     }
 
     //public
