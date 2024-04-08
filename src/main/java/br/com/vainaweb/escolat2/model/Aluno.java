@@ -55,12 +55,4 @@ public class Aluno {
         this.endereco = endereco;
     }
 
-    @Override
-    public String toString() {
-        return "Aluno{" +
-                "nome='" + nome + '\'' +
-                ", curso=" + curso +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
