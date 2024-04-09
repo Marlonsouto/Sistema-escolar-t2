@@ -15,5 +15,5 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     Optional<Aluno> findAllById(int id);
 
     @Query("nome,email,curso from tb_alunos aluno Where aluno.id =: id ")
-    Optional<Set<Aluno>> ListaDeAluno (Long Id);
+    Optional<Set<Aluno>> listaDeAlunoPorId (Long Id);
 }

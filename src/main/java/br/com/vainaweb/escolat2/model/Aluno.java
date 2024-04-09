@@ -1,7 +1,10 @@
 package br.com.vainaweb.escolat2.model;
 
+import br.com.vainaweb.escolat2.dto.DadosAtualizados;
+import br.com.vainaweb.escolat2.dto.DadosAtualizadosAluno;
 import br.com.vainaweb.escolat2.enums.CursoEnum;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -53,6 +56,10 @@ public class Aluno {
         this.telefone = telefone;
         this.cpf = cpf;
         this.endereco = endereco;
+    }
+    public void atualizarInfo(@Valid DadosAtualizadosAluno dados) {
+        this.nome = dados.nome() != null ? dados.nome(): this.nome;
+        this.email = dados.email()!= null ? dados.email(): this.email;
     }
 
 }

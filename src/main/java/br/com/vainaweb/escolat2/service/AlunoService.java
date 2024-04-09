@@ -6,7 +6,7 @@ import br.com.vainaweb.escolat2.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class AlunoService {
@@ -21,7 +21,7 @@ public class AlunoService {
 
     }
 
-    public List<Aluno> ListarAlunos() {
+    public List<Aluno> ListarTodosAlunos() {
 
         var alunoList = alunoRepository.findAll();
 
@@ -38,8 +38,16 @@ public class AlunoService {
         alunoRepository.deleteById(id);
     }
 
-    //public void atualizarAluno(){
-    // }
+    //public void atualizarAluno(Long id){
+        //Optional<Aluno> alunoRepository.ListaDeAluno();
+
+     //}
+
+    private Optional<Aluno> EncontrarAlunoPorId(Long id) {
+        Aluno optionalAluno = alunoRepository.getReferenceById(id);
+        Optional<Aluno> optionalList = Optional.of(optionalAluno);
+        return optionalList;
+    }
 
 }
 

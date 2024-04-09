@@ -6,8 +6,6 @@ import br.com.vainaweb.escolat2.repository.AlunoRepository;
 import br.com.vainaweb.escolat2.service.AlunoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +17,21 @@ public class AlunoCrontroller {
     AlunoRepository alunoRepository;
     AlunoService alunoService;
     @PostMapping
-    public ResponseEntity<Aluno> atualizarAluno(@RequestBody @Valid DadosAluno dadosAluno ){
+    public void SalvarAluno(@RequestBody @Valid DadosAluno dadosAluno ){
         alunoService.salvarAluno(dadosAluno);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping({"/id"})
-    public ResponseEntity<Aluno> listarAluno (){
-        var alun = alunoService.ListarAlunos();
+    public ResponseEntity<Aluno> listarTodosAlunos (@PathVariable Long id){
+        var alun = alunoService.ListarTodosAlunos();
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> listarAlunoByid (@PathVariable Long id){
+       var resposta = listarAlunoByid(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 
     }
 }
