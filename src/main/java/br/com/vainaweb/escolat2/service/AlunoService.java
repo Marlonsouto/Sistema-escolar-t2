@@ -1,7 +1,10 @@
 package br.com.vainaweb.escolat2.service;
 
 import br.com.vainaweb.escolat2.dto.DadosAluno;
+import br.com.vainaweb.escolat2.dto.DadosAtualizadosAluno;
+import br.com.vainaweb.escolat2.enums.CursoEnum;
 import br.com.vainaweb.escolat2.model.Aluno;
+import br.com.vainaweb.escolat2.model.Endereco;
 import br.com.vainaweb.escolat2.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,15 +41,16 @@ public class AlunoService {
         alunoRepository.deleteById(id);
     }
 
-    //public void atualizarAluno(Long id){
-        //Optional<Aluno> alunoRepository.ListaDeAluno();
+    public Optional<Aluno> atualizarAluno(Long id, DadosAtualizadosAluno dados) {
+        var aluno = new Aluno();
+        aluno.atualizarInfoAluno(dados);
+        return Optional.of(aluno);
+     }
 
-     //}
-
-    private Optional<Aluno> EncontrarAlunoPorId(Long id) {
+    private Optional<Aluno> encontrarAlunoPorId(Long id) {
         Aluno optionalAluno = alunoRepository.getReferenceById(id);
-        Optional<Aluno> optionalList = Optional.of(optionalAluno);
-        return optionalList;
+        var  resultado = alunoRepository.listaDeTodosAlunoPorId(id);
+        return resultado;
     }
 
 }

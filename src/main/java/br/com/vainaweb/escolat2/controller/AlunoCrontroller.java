@@ -30,8 +30,15 @@ public class AlunoCrontroller {
 
     @GetMapping("/{id}")
     public ResponseEntity<String> listarAlunoByid (@PathVariable Long id){
-       var resposta = listarAlunoByid(id);
+       var resposta = alunoService
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
+    }
+
+    @PutMapping
+    public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id){
+
+        alunoService.;
 
     }
 }

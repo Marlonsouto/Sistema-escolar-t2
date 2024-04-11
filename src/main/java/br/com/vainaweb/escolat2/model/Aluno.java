@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Entity()
 @Table(name = "tb_alunos")
@@ -57,9 +58,12 @@ public class Aluno {
         this.cpf = cpf;
         this.endereco = endereco;
     }
-    public void atualizarInfo(@Valid DadosAtualizadosAluno dados) {
-        this.nome = dados.nome() != null ? dados.nome(): this.nome;
-        this.email = dados.email()!= null ? dados.email(): this.email;
+    public void atualizarInfoAluno(@Valid  DadosAtualizadosAluno dados) {
+       var aluno = this.nome = (dados.nome() != null) ? dados.nome(): this.nome;
+        this.telefone = (dados.telefone() != null) ? dados.telefone(): this.telefone;
+        this.endereco = (dados.endereco() != null) ? dados.endereco() : this.endereco;
+        this.nome = (dados.cursoEnum() != null) ? dados.cursoEnum().name(): this.getCurso().name();
+
     }
 
 }
