@@ -12,8 +12,8 @@ import java.util.Set;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
-    Optional<Aluno> findAllById(int id);
-
-    @Query("nome,email,curso from tb_alunos aluno Where aluno.id =: id ")
-    Optional<Aluno> listaDeTodosAlunoPorId (Long Id);
+    @Query("SELECT aluno FROM Aluno aluno WHERE aluno.id = :id")
+    Optional<Aluno> listaDeTodosAlunoPorId (@Param("id") Long id);
 }
+
+
